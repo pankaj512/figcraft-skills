@@ -1,5 +1,7 @@
 # FigCraft Skills
 
+> **Status:** Early draft; review the current MCP tool schemas before relying on operational details. Contributions and corrections are welcome.
+
 An original, native-MCP-first skill set for designing, editing, reviewing, prototyping, and handing off FigCraft documents.
 
 These skills were authored from scratch after comparing publicly available FigCraft-related skills and guides. They are **not installed copies** of those packages. Third-party references informed workflow ideas only; Figma Plugin API recipes, stale schemas, and unverified CLI assumptions were excluded. The FigCraft MCP instructions and live tool schemas available in the active session take precedence over this repository's guidance.
@@ -26,6 +28,10 @@ These skills were authored from scratch after comparing publicly available FigCr
 - Inspect the target document before changing it. Preserve user content and do not save unless requested or necessary to deliver a requested file.
 - Save editable native design files as `.figcraft` when requested.
 
-## Installation/use
+## Use
 
-These are plain Agent Skills format directories. To use them, configure your agent host to discover the `skills/` directory or copy only the chosen skill into a supported skills location. No installation has been performed by creating this repository.
+These are plain Agent Skills format directories. Configure your agent host to discover the `skills/` directory or copy only the chosen skill into a supported skills location. Creating this repository does not install or activate the skills.
+
+## License
+
+MIT. See [`LICENSE`](LICENSE).

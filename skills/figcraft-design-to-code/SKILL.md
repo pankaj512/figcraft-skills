@@ -9,6 +9,7 @@ This skill connects a native design document to an implementation. Load shared `
 
 ## 1. Confirm implementation scope
 
+- Read and follow the target repository's `AGENTS.md` / `CLAUDE.md` instructions and local contributor guidance before editing.
 - Identify target repository/framework, route or component, supported platforms, and requested fidelity.
 - Inspect existing project structure and patterns before changing code. Do not introduce a new framework or dependency without need and authorization.
 - Identify which FigCraft frames/states are authoritative. Ask about ambiguous differences between references and document.
