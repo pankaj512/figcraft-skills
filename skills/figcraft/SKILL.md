@@ -42,7 +42,7 @@ Never guess an unfamiliar command id, property, enum, or required argument. Quer
 - Colors use `#RRGGBB` or `#RRGGBBAA` unless the current schema states otherwise.
 - Resolve the requested document before inspecting or mutating it, and record the opaque document ID returned by the current tool (`open_file`, `inspect_document`, document listing, or the discovered equivalent). Never construct, guess, or reuse an ID from another document.
 - Pass that ID as `document` on every document-scoped call whose current schema accepts it: reads, edits, renders, saves, exports, and undo. Discover support from the active schema; do not assume every call accepts a target.
-- Use explicit node IDs and parents. Do not rely on the current selection or on the tool's file-in-front default.
+- Use node IDs returned by the current tool and explicit parents; never predict a node ID. Do not rely on the current selection or on the tool's file-in-front default.
 - Re-resolve the document and record the new ID after create, open, switch, or import changes the active document.
 - Prefer document IDs for agent calls. Paths remain appropriate for save and export destinations and for explicit path-addressed user requests.
 - A window or front-view capture shows what is in front, not necessarily the intended document. Target document renders explicitly.

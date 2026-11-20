@@ -10,7 +10,7 @@ This is a focused record of the FigCraft MCP tool schemas and read-only command 
 - Called `list_commands` with filters `doc.`, `file.export`, `file.import`, `session`, `library`, and `proto.interaction`.
 - Commands quoted below were listed, not executed.
 
-## R1 — Document targeting
+## R1 - Document targeting
 
 The `document` parameter on inspection, mutation, screenshot, save and export tools is optional. Its schema says:
 
@@ -24,7 +24,7 @@ It returns `{index, id, name, path?, dirty, active}` records. For agents, pin th
 
 `set_properties.ids` defaults to the selection. `create_node.parent` defaults to the current page. These defaults further motivate explicit targets.
 
-## R2 — Export scope and output
+## R2 - Export scope and output
 
 The direct `export` tool describes the default scope as:
 
@@ -32,7 +32,7 @@ The direct `export` tool describes the default scope as:
 
 Both the direct tool and `file.export` distinguish the `.fig` option:
 
-> the whole file … experimental … with `warnings` for what was left out; other apps may not open every file
+> the whole file ... experimental ... with `warnings` for what was left out; other apps may not open every file
 
 The `file.export` command also supports:
 
@@ -47,7 +47,7 @@ Other relevant options:
 - `file.exportLayers` names files from layer names and suffixes; “slashes in a layer name make folders.” This establishes a naming behavior, not evidence of a path-traversal vulnerability.
 - Direct export without a path returns image content, text, or base64 data depending on format. Omitting a filesystem destination does not mean no design content leaves the engine.
 
-## R3 — Collaboration secrets, defaults and revocation
+## R3 - Collaboration secrets, defaults and revocation
 
 `collab.host` describes its returned `link` and `url` as:
 
@@ -69,7 +69,7 @@ and the file stays on the server, accessible to its owner. Removal is a separate
 
 `collab.files` explicitly says owner tokens and the owner's own links are not returned; do not generalize this protection to `collab.peers` or publishing responses.
 
-## R4 — Libraries and network activity
+## R4 - Libraries and network activity
 
 - `library.publish` versions a local library; the file must be saved for other files to see it.
 - `library.publishToServer` can keep the document on a server and returns edit/view links when it does so.
@@ -78,7 +78,7 @@ and the file stays on the server, accessible to its owner. Removal is a separate
 
 These operations have different side effects despite all belonging to design-system work.
 
-## R5 — Import and native save
+## R5 - Import and native save
 
 - `open_file` supports native/JSON documents, `.fig`, `.sketch`, SVG and images; the documented imports are best effort where indicated and return warnings.
 - `file.import` appends pages from `.figcraft`, `.penpot`, REST API file JSON, `.fig`, and `.sketch`, with variables/flows as supported. SVG becomes an editable frame and images become image layers.
@@ -86,7 +86,7 @@ These operations have different side effects despite all belonging to design-sys
 
 These observations support explicit handling of import warnings and format-specific persistence semantics.
 
-## R6 — Supported modeling/prototype breadth
+## R6 - Supported modeling/prototype breadth
 
 - `set_properties` lists horizontal, vertical and grid layout; wrap; fill/hug/fixed sizing; constraints; gradients; effects; and text properties.
 - `proto.interaction.add` lists navigation, back, scrolling, overlays, URL opening, component changes, variables, variable modes and conditional actions, plus multiple triggers, transitions and custom easing.

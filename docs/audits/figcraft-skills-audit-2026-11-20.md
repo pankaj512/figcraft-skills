@@ -1,8 +1,8 @@
 # FigCraft skills: documentation and security audit
 
-**Date:** 2026-11-20  
-**Audited revision:** `52001c9a650ff58801fd1b5c02b5269bbeca313b`  
-**Scope:** all nine `skills/*/SKILL.md` files, `README.md`, the tracked file inventory, the seven supplied documentation pages, and relevant first-party MCP/CLI documentation and live command schemas.
+- **Date:** 2026-11-20
+- **Audited revision:** `52001c9a650ff58801fd1b5c02b5269bbeca313b`
+- **Scope:** all nine `skills/*/SKILL.md` files, `README.md`, the tracked file inventory, the seven supplied documentation pages, and relevant first-party MCP/CLI documentation and live command schemas.
 
 ## Verdict
 
@@ -24,7 +24,7 @@ FigCraft has substantial Figma-like capabilities: grid/wrapping auto layout, con
 
 ## Security findings
 
-### S1 — Medium: layer IDs are protected, but document identity is not pinned
+### S1 - Medium: layer IDs are protected, but document identity is not pinned
 
 **Location:** `skills/figcraft/SKILL.md:38-44`; `skills/figcraft-design/SKILL.md:18`; `skills/figcraft-import-export/SKILL.md:21-23`.
 
@@ -36,7 +36,7 @@ FigCraft has substantial Figma-like capabilities: grid/wrapping auto layout, con
 
 **Verification criterion:** In a disposable two-document scenario, changing the front tab must not redirect an edit/export intended for the original document.
 
-### S2 — Medium: export guidance omits the whole-document format exception
+### S2 - Medium: export guidance omits the whole-document format exception
 
 **Location:** `skills/figcraft-import-export/SKILL.md:27-31`; `skills/figcraft-design-to-code/SKILL.md:27`.
 
@@ -48,7 +48,7 @@ FigCraft has substantial Figma-like capabilities: grid/wrapping auto layout, con
 
 **Verification criterion:** A one-screen handoff from a document containing an unrelated page must either exclude that page through an explicitly scoped deliverable or clearly request whole-file authorization before export.
 
-### S3 — Medium: sharing consent does not specify access level, destination or credential handling
+### S3 - Medium: sharing consent does not specify access level, destination or credential handling
 
 **Location:** `skills/figcraft/SKILL.md:56-65`; `skills/figcraft-design-system/SKILL.md:40`.
 
@@ -60,7 +60,7 @@ FigCraft has substantial Figma-like capabilities: grid/wrapping auto layout, con
 
 **Verification criterion:** A view-only sharing request returns the view share link, not the generic owner/edit link; stopping sharing is reported as revocation rather than server deletion.
 
-### S4 — Low: documented confinement exists, but setup guidance does not surface it
+### S4 - Low: documented confinement exists, but setup guidance does not surface it
 
 **Location:** `README.md:23-33`; `skills/figcraft/SKILL.md:59-61`.
 
@@ -74,7 +74,7 @@ FigCraft has substantial Figma-like capabilities: grid/wrapping auto layout, con
 
 ## Documentation and usability findings
 
-### V1 — Medium: a host-specific calling convention is presented as general skill behavior
+### V1 - Medium: a host-specific calling convention is presented as general skill behavior
 
 **Location:** `skills/figcraft/SKILL.md:25`; `README.md:25,33`.
 
@@ -82,7 +82,7 @@ The router hardcodes `tools["figcraft"].<tool>` inside `execute`. That is accura
 
 **Fix:** Make the rule host-neutral: discover the available FigCraft MCP tools using the host's interface; use Code Mode only when the host exposes it. Keep canonical tool and command names. If OpenCode-only is intentional, state that scope in the README instead of suggesting general host portability.
 
-### V2 — Low: single-skill installation instructions omit the shared dependency
+### V2 - Low: single-skill installation instructions omit the shared dependency
 
 **Location:** `README.md:33`; all eight focused skills' opening instructions.
 
@@ -90,7 +90,7 @@ The README says users can “copy only the chosen skill,” but every focused sk
 
 **Fix:** Recommend installing the complete set, or the chosen skill plus `figcraft` and its task-relevant dependencies. Keep shared policy authoritative in one place rather than duplicating it throughout every skill. State what to do when a required skill cannot be loaded.
 
-### V3 — Low: several native workflows lack discovery pointers
+### V3 - Low: several native workflows lack discovery pointers
 
 **Locations:** `skills/figcraft/SKILL.md:10-21`; `skills/figcraft-design-to-code/SKILL.md:17-27`; `skills/figcraft-review/SKILL.md:10-17`; `skills/figcraft-responsive/SKILL.md:12-14`; `skills/figcraft-assets/SKILL.md:15,26-31`.
 
@@ -104,7 +104,7 @@ The supplied docs support more than the current routes explicitly guide [P3, P4,
 
 **Fix:** Add focused, conditional references for these branches if broad FigCraft workflow coverage is intended. Do not cache a complete command catalog in the skills or load every workflow for every task. These omissions are coverage opportunities, not evidence that FigCraft lacks the features or that every task needs them.
 
-### V4 — Low: retry guidance does not cover an attached transport failure
+### V4 - Low: retry guidance does not cover an attached transport failure
 
 **Location:** `skills/figcraft/SKILL.md:44`; `skills/figcraft-design/SKILL.md:34-38`.
 
@@ -117,7 +117,7 @@ The current rule to inspect after a failed batch is good. First-party MCP docume
 | Skill | Documentation fit | Key follow-up |
 |---|---|---|
 | `figcraft` | Coordinates, parent-relative geometry, layout ownership, native tools, schema discovery and inspect/render verification align with P6/P9 and active schemas. | S1, S3, V1, V4; route missing workflows deliberately. |
-| `figcraft-design` | Native frames, grid/row/column auto layout, components, real content and per-frame QA align with P2–P4. | Inherit explicit document targeting; optional template discovery. |
+| `figcraft-design` | Native frames, grid/row/column auto layout, components, real content and per-frame QA align with P2 to P4. | Inherit explicit document targeting; optional template discovery. |
 | `figcraft-design-system` | Modes, styles, variants, slots, bindings and linked assets fit documented capabilities. | Distinguish local library publishing from server publishing/network checks. |
 | `figcraft-prototype` | Native interactions, conditional actions, flow/overlay/scroll checks and verification boundaries are appropriate. | Keep runtime input/playback capability checks; no evidence warrants deleting them or declaring text input unsupported globally. |
 | `figcraft-review` | Structure plus pixels and qualified accessibility claims are sound. | Add comment/version/branch references if review scope includes them. |
@@ -155,7 +155,7 @@ The skills' repeated instruction to inspect current schemas is therefore well ju
 5. Link least-privilege setup and generalize uncertain-completion handling (S4/V4).
 6. Extend native workflow discovery only for the branches the repository intends to cover (V3).
 
-Before calling revised instructions hardened, exercise S1–S3 with disposable documents and a controlled sharing destination, and test malicious document/comment text as data. These are proposed acceptance checks, **not tests performed by this audit**. The original skills remain unchanged; this delivery records findings and evidence.
+Before calling revised instructions hardened, exercise S1 to S3 with disposable documents and a controlled sharing destination, and test malicious document/comment text as data. These are proposed acceptance checks, **not tests performed by this audit**. The original skills remain unchanged; this delivery records findings and evidence.
 
 ## Sources
 
@@ -172,4 +172,4 @@ All URLs below were retrieved successfully on 2026-11-20.
 | P7 | [Troubleshooting](https://craft.wiki/apps/figcraft/troubleshooting/) | Import/font limitations, font-download consent, Dev Mode restrictions, attached Linux caveat, recovery and diagnostics. |
 | P8 | [Developer CLI documentation](https://github.com/storytold/figcraft/blob/main/docs/cli.md) ([retrieved raw](https://raw.githubusercontent.com/storytold/figcraft/main/docs/cli.md)) | Confinement defaults, whole-file `.fig`/Penpot exports, scoped export behavior, warnings, native conversion and code mappings. |
 | P9 | [Developer MCP documentation](https://github.com/storytold/figcraft/blob/main/docs/mcp.md) ([retrieved raw](https://raw.githubusercontent.com/storytold/figcraft/main/docs/mcp.md)) | Document IDs, transport retry semantics, roots/network enforcement boundaries, native conventions, SVG handling, prototype presentation, secret-bearing collaboration responses and batch rollback limits. |
-| R1–R6 | [Active tool/command evidence](figcraft-runtime-evidence-2026-11-20.md) | Session-specific contracts, retrieved read-only; complements public documentation without assuming the same release. |
+| R1-R6 | [Active tool/command evidence](figcraft-runtime-evidence-2026-11-20.md) | Session-specific contracts, retrieved read-only; complements public documentation without assuming the same release. |
