@@ -24,7 +24,7 @@ Use `inspect_document` and `get_node` to capture:
 - Repeated components, variants, instance overrides, and image/vector assets.
 - Interaction inventory and target states (load `figcraft-prototype` when interaction behavior is requested).
 
-Take screenshots as visual references, but do not treat a screenshot as the sole implementation specification when editable structure exists. Verify any asset export and preserve attribution/licensing information supplied by the user.
+Take screenshots as visual references, but do not treat a screenshot as the sole implementation specification when editable structure exists. Verify any asset export and preserve attribution/licensing information supplied by the user. For an editable or whole-document asset export, follow the scope and overwrite-authorization rules in `figcraft-import-export` first; a selection does not limit what a whole-document format writes.
 
 ## 3. Implement semantically
 

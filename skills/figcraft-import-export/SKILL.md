@@ -25,10 +25,18 @@ Load the shared `figcraft` skill. Confirm the requested source/target formats an
 ## Export
 
 1. Confirm purpose, format, scope (page/frame/layers), scale, transparency, and destination when not specified.
-2. Query the current `file.export` schema. Check supported formats and export options; do not infer them from old documentation. Pass the recorded document ID where the schema accepts it.
-3. Export only the requested content and avoid unintended pages or hidden layers. Preserve native document unless asked to change it.
-4. Verify the returned path/result, then inspect or render the relevant exported content where possible. If the export result is uncertain, verify whether output was written before retrying. A command success alone does not prove the export is visually correct.
-5. Be clear about lossiness: raster exports flatten editing; SVG/PDF support may differ for effects, fonts, masks, and advanced properties.
+2. Query the current `file.export` and direct `export` schemas. Check supported formats and export options; do not infer them from old documentation. Direct-tool and engine-command format support can differ, so discover what the active schema exposes. Pass the recorded document ID where the schema accepts it.
+3. Classify the requested format by its real serialization scope before deciding what will be written:
+   - **Scoped formats** honor a page, frame, or layer selection. Pass explicit recorded document and layer/frame IDs rather than relying on the current selection, and export only the requested content.
+   - **Whole-document formats** serialize the entire file regardless of selection; `.fig` is one, and `penpot` where the active schema exposes it. A selection, a preview, or hidden-layer visibility does not limit what these write.
+   The format list is illustrative and session-specific; confirm the class from the active schema rather than assuming.
+4. Resolve scope and authorization before exporting:
+   - For scoped formats, use explicit IDs and confirm the deliverable covers only the requested content.
+   - For whole-document formats, obtain and record explicit authorization for the whole-file scope before exporting. Do not treat an underspecified request as authorization.
+   - For a selected-only editable handoff, either construct an approved isolated document containing only the needed dependencies and inspect its structure, or obtain whole-file authorization instead.
+5. Check the destination for overwrite authorization before writing, the same as for a native save. Do not overwrite an existing file without authorization.
+6. Verify the returned path/result, then inspect the actual output structure (not only a screenshot) where possible. If the export result is uncertain, verify whether output was written before retrying. A command success alone does not prove the export is visually correct or correctly scoped.
+7. Be clear about lossiness: raster exports flatten editing; SVG/PDF support may differ for effects, fonts, masks, and advanced properties.
 
 ## Handoff
 
