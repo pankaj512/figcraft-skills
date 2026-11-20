@@ -40,8 +40,16 @@ Never guess an unfamiliar command id, property, enum, or required argument. Quer
 - `create_node` and `set_properties` use x/y relative to the parent (page if top-level); groups do not create a coordinate origin. Inspect output may include parent-relative coordinates and absolute page bounds.
 - Auto-layout frames control child placement. In a flow, do not set child x/y; use layout, gap, padding, alignment, and child sizing. Position exceptions deliberately, using the current supported absolute-positioning property.
 - Colors use `#RRGGBB` or `#RRGGBBAA` unless the current schema states otherwise.
-- Use returned node IDs; never predict IDs or target an unknown selection.
-- Use a batch for a coherent subtree or edit transaction, not an opaque mega-batch. On a failed batch, read the failing step/error and inspect before retrying.
+- Resolve the requested document before inspecting or mutating it, and record the opaque document ID returned by the current tool (`open_file`, `inspect_document`, document listing, or the discovered equivalent). Never construct, guess, or reuse an ID from another document.
+- Pass that ID as `document` on every document-scoped call whose current schema accepts it: reads, edits, renders, saves, exports, and undo. Discover support from the active schema; do not assume every call accepts a target.
+- Use explicit node IDs and parents. Do not rely on the current selection or on the tool's file-in-front default.
+- Re-resolve the document and record the new ID after create, open, switch, or import changes the active document.
+- Prefer document IDs for agent calls. Paths remain appropriate for save and export destinations and for explicit path-addressed user requests.
+- A window or front-view capture shows what is in front, not necessarily the intended document. Target document renders explicitly.
+- When a document-scoped call cannot accept a target, inspect immediately before the call and stop if the front document's returned ID differs from the recorded ID.
+- Use a batch for a coherent subtree or edit transaction, not an opaque mega-batch. On a failed batch, read the failing step or error.
+- Treat any mutation as uncertain when its result is missing, ambiguous, or interrupted: a single create, import, edit, save, or export as well as a batch. Inspect the document or output to decide whether it landed before retrying, then retry only the missing part. Do not replay a whole batch or duplicate a creation or import.
+- A batch's undo step covers document edits, not preferences, clipboard, tool state, or UI requests. Do not promise a full rollback.
 - Prefer native frames, text, vectors, styles, variables, components, and instances over flattening a design into a screenshot.
 
 ## Quality and safety

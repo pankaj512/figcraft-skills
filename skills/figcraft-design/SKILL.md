@@ -15,7 +15,7 @@ For a greenfield design, choose a clear visual premise tied to the product (not 
 
 ## 2. Inspect and plan
 
-1. Call `inspect_document` before mutation. Check current page, existing frames, reusable components, variables, and available space. Use `get_node` for important subtrees if the tree is truncated.
+1. Resolve the target document and record its ID, then call `inspect_document` with that ID before mutation. Check current page, existing frames, reusable components, variables, and available space. Use `get_node` with the same document target for important subtrees if the tree is truncated.
 2. If the design needs device dimensions, query `frame.presets` with `list_commands` and use a currently listed preset; do not rely on stale preset names. If the user provides exact dimensions, honor those.
 3. Sketch the hierarchy in a short plan: screen → sections → components/content. Identify fixed, scrolling, and overlay areas.
 4. Declare the design's structural intent: which frames use auto layout and which elements are intentional absolute overlays or decoration.
@@ -33,7 +33,9 @@ For a greenfield design, choose a clear visual premise tied to the product (not 
 
 ## 4. Work in coherent batches
 
-Use the dedicated `create_node` tool for straightforward node creation and `set_properties` for targeted edits. Use `batch` for a coherent section or subtree that benefits from one undo step. Name steps and chain results via `$ref` rather than predicting node IDs. For commands, query `list_commands` first and pass the exact current schema. Keep batches small enough to diagnose.
+Use the dedicated `create_node` tool for straightforward node creation and `set_properties` for targeted edits. Use `batch` for a coherent section or subtree that benefits from one undo step. Pass the recorded document ID to every batch or command that accepts a document target. Name steps and chain results via `$ref` rather than predicting node IDs. For commands, query `list_commands` first and pass the exact current schema. Keep batches small enough to diagnose.
+
+If a batch fails or its completion is uncertain, inspect the document before retrying, then retry only the missing part rather than replaying the batch.
 
 If creating a multi-screen design, build the shared foundation first, then one screen/section at a time. Inspect and render at milestones rather than generating the entire deliverable without feedback.
 
@@ -41,8 +43,8 @@ If creating a multi-screen design, build the shared foundation first, then one s
 
 For every requested frame:
 
-- Inspect hierarchy, dimensions, fills, text, auto-layout sizing, and bounds with `inspect_document` / `get_node`.
-- Take a targeted `screenshot` and visually assess alignment, wrapping, contrast, clipping, missing elements, and the brief's visual direction.
+- Inspect hierarchy, dimensions, fills, text, auto-layout sizing, and bounds with `inspect_document` / `get_node` in the recorded document.
+- Take a targeted `screenshot` of the relevant frame(s) in that document and visually assess alignment, wrapping, contrast, clipping, missing elements, and the brief's visual direction.
 - Fix concrete issues with targeted edits, then inspect and render again.
 - Check important text and touch target sizing where relevant. Report font limitations rather than assuming a font exists.
 
@@ -50,4 +52,4 @@ A successful tool call is not visual QA. A headless screenshot does not mean the
 
 ## 6. Save and report
 
-Save an editable `.figcraft` only when the user requested a saved file or delivery path. Save to their exact target; do not overwrite a preexisting file without permission. Then inspect the saved document state and report the path, screens/frames built, verification performed, assumptions, and unresolved limitations.
+Save an editable `.figcraft` only when the user requested a saved file or delivery path. Pass the recorded document ID to the save operation where the current schema accepts it, and save to their exact target; do not overwrite a preexisting file without permission. If the save result is uncertain, inspect the document and destination before retrying. Then inspect the saved document state and report the path, screens/frames built, verification performed, assumptions, and unresolved limitations.
