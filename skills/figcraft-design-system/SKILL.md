@@ -38,3 +38,5 @@ A design system should make the requested work more consistent and maintainable.
 - Render representative variants and any requested theme modes. Include edge cases such as long labels, disabled or error states if they are in scope.
 - Fix mismatches and repeat inspection/rendering.
 - Report the created or reused tokens/components, supported modes/states, verification, and known limitations. Don't claim library publishing or cross-file availability unless explicitly performed and verified.
+- For handoff, `variable.export` returns or writes JSON, CSS, Tailwind, or Dart from the file's own collections. Writing a path follows the destination and overwrite rule in the shared skill.
+- If the system is library-linked or published, use `library.list` and `library.updates` to see enabled libraries and pending updates, and follow `figcraft-collaboration` for publishing. Do not describe a local change as available to other files until a publish was performed and verified.

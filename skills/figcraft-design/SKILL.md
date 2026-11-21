@@ -13,6 +13,8 @@ Extract the target audience and job, platform/viewport, requested screens/states
 
 For a greenfield design, choose a clear visual premise tied to the product (not a generic template), then establish a small coherent palette, type hierarchy, and spacing rhythm. Respect a provided brand or reference over personal defaults. Real, specific copy is preferable to lorem ipsum; never invent factual product claims.
 
+If the user asks for a starter template, discover the current template commands (`template.list`, `file.newFromTemplate`). A template opens a new unsaved document; treat it as a starting point and still apply the brief's visual premise, content, and platform.
+
 ## 2. Inspect and plan
 
 1. Resolve the target document and record its ID, then call `inspect_document` with that ID before mutation. Check current page, existing frames, reusable components, variables, and available space. Use `get_node` with the same document target for important subtrees if the tree is truncated.

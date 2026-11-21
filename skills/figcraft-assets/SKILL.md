@@ -28,6 +28,9 @@ Use assets to improve clarity and identity, not to decorate by default. Load sha
 - Use semantic text styles where available; set font family, weight, size, line-height, and letter spacing deliberately.
 - Check wrapping and truncation at actual frame width with both short and long strings.
 - Inspect the resulting text properties and render; warn about font substitution or missing glyphs if observed.
+- Discover the document's font state before substituting: `file.fontReport` lists fonts used and whether each family is available, and `text.missingFonts` lists missing families with their layers.
+- If a missing font may be downloaded, ask first; downloading or installing a font needs user approval, and `font.downloads` reports whether downloading is allowed in this session. `text.loadFont` loads a font file for this session only and is not an installation.
+- After a font arrives, `text.rescanFonts` picks up fonts installed while the app runs and `text.refit` re-measures auto-sizing text. Inspect wrapping again rather than assuming the new face fits.
 - Do not simulate a required brand face using an arbitrary similar font without disclosing the limitation.
 
 ## Verify

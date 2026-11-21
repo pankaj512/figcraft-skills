@@ -12,6 +12,7 @@ Load shared `figcraft` rules and use `figcraft-design` for initial construction.
 - Identify target platforms and the smallest/largest required viewport. Use supplied dimensions when present.
 - If the task requires platform presets, discover current `frame.presets` through `list_commands`; don't rely on memorized device values.
 - Determine whether the document supports true responsive constraints or whether the deliverable requires separate breakpoint frames. Don't promise browser-like reflow if only fixed frames are being constructed.
+- When the deliverable is a presented prototype, discover the current presentation settings (`proto.settings`) and presentation or preview commands (`proto.present`, `proto.preview`). A responsive presentation option can resize frames to the screen so their constraints and auto layout respond. A presentation or preview is evidence only when it was actually observed; the size matrix below remains the required check.
 - Include representative content stress: long title, long localized label, multiline body, empty/loading/error state when in scope.
 
 ## 2. Choose layout rules per region

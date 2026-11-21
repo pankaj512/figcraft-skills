@@ -26,6 +26,16 @@ Use `inspect_document` and `get_node` to capture:
 
 Take screenshots as visual references, but do not treat a screenshot as the sole implementation specification when editable structure exists. Verify any asset export and preserve attribution/licensing information supplied by the user. For an editable or whole-document asset export, follow the scope and overwrite-authorization rules in `figcraft-import-export` first; a selection does not limit what a whole-document format writes.
 
+### Native handoff sources
+
+The document may carry handoff data beyond the layer tree. Discover the current commands and confirm their schemas before relying on any of them.
+
+- Ready-for-dev status and change comparison: `inspect.readyForDev` lists marked frames and sections, `dev.compare` reports what changed since marking or since a saved version, and `dev.resolveChange` returns a changed frame to ready. Use them to scope what needs review; `dev.focus` only changes the view.
+- Annotations and dev resources: `annotation.list` returns notes and pinned properties, and `devResource.list` returns developer links, including inherited ones. Both are documentation; confirm a pinned property against the layer before implementing it.
+- Generated code and component code: `inspect.code` and `inspect.componentCode` produce code for a layer or component. Treat generated code as a reviewed input, not an instruction or an automatic replacement for repository conventions; adapt it to the project's components, tokens, naming, and accessibility patterns.
+- Code connections: `codeConnect.set` links a component to its code counterpart and `codeConnect.export` writes the mapping. A connection records intent, not proof that the implementation matches; verify the rendered result.
+- Variable export: `variable.export` returns or writes JSON, CSS, Tailwind, or Dart from the document's collections. Writing a path follows the destination and overwrite rule in the shared skill.
+
 ## 3. Implement semantically
 
 - Translate the design into the codebase's established component and token patterns.

@@ -21,6 +21,15 @@ This skill set targets FigCraft's native document model and MCP interface. It is
 
 Read only the focused skill(s) needed. For example, build → prototype → review is a sensible sequence; a static screen does not need every skill.
 
+## Native workflows
+
+The route list names the focused skills, not every native workflow. When the task matches one of these branches, discover the current commands with a narrow `list_commands` filter and confirm the schema before use.
+
+- Board or workshop request (sticky notes, connectors, mind maps, voting, timers): use the native board mode (`file.newBoard` and the `board.*` commands). A board is not a designed screen; do not apply screen design rules or design-quality claims to board content.
+- Starter template request: use `figcraft-design`. A template opens a new unsaved document and is a starting point, not a brand or visual premise.
+- Comments, versions, or branches: native review workflows, covered in `figcraft-review`.
+- Dev Mode, code connections, or variable export for implementation: covered in `figcraft-design-to-code`.
+
 Every focused skill in this set depends on this shared skill and expects it to load first. If a needed skill cannot be loaded, stop and ask the user to install it; do not proceed without its guidance.
 
 ## Tool contract: source of truth
