@@ -23,7 +23,7 @@ These skills were authored from scratch after comparing publicly available FigCr
 
 ## Operating assumptions
 
-- Use the active FigCraft tools (`tools.figcraft.*`) when available. Check their schemas and the current command catalog rather than relying on guessed or memorized parameters.
+- Use the active FigCraft tools when your host exposes them, as direct MCP tools or through a Code Mode wrapper such as `tools.figcraft.*`. Check their schemas and the current command catalog rather than relying on guessed or memorized parameters.
 - The current integration can be headless. A rendered screenshot is useful evidence of document pixels; it does not prove a GUI opened or that prototype playback was exercised.
 - Do not install FigCraft, CLI tools, fonts, skills, or other software without explicit authorization.
 - Inspect the target document before changing it. Preserve user content and do not save unless requested or necessary to deliver a requested file.
@@ -31,7 +31,19 @@ These skills were authored from scratch after comparing publicly available FigCr
 
 ## Use
 
-These are plain Agent Skills format directories. Configure your agent host to discover the `skills/` directory or copy only the chosen skill into a supported skills location. Creating this repository does not install or activate the skills.
+These are plain Agent Skills format directories. Configure your agent host to discover the `skills/` directory, or copy a skill into a supported skills location. Creating this repository does not install or activate the skills.
+
+Install the complete set, or the chosen skill plus `figcraft` and the focused skills its tasks need. Every focused skill loads the shared `figcraft` rules, including its security and consent policy, so a focused skill installed alone is incomplete. When a required skill cannot be loaded, the agent should stop and ask for it to be installed rather than proceeding without its guidance.
+
+## Confine file access
+
+File-path rules in these skills are instructions, not an enforcement boundary. FigCraft can enforce the boundary itself; see the official [AI agents documentation](https://craft.wiki/apps/figcraft/ai-agents/) and [MCP documentation](https://github.com/storytold/figcraft/blob/main/docs/mcp.md).
+
+- `--automation-read-root` and `--automation-write-root` restrict access to existing folders. Read and write roots can be separate, and a read-only setup is possible.
+- For a headless session, pass the flags on the command that starts it. An attached session inherits the confinement the app was started with, so configure it there rather than per call.
+- Without these flags, CLI subcommands read and write with the launching user's authority. Confined calls also have documented network restrictions.
+- Confinement is not a sandbox. Exported bytes still reach the assistant, a network-share root reaches that file server, and the MCP documentation records a path-check/open race with other local software.
+- If a call is refused, report the blocker and ask for an allowed path. Do not restart with broader roots or remove confinement to work around an error.
 
 ## License
 

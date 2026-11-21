@@ -21,9 +21,11 @@ This skill set targets FigCraft's native document model and MCP interface. It is
 
 Read only the focused skill(s) needed. For example, build → prototype → review is a sensible sequence; a static screen does not need every skill.
 
+Every focused skill in this set depends on this shared skill and expects it to load first. If a needed skill cannot be loaded, stop and ask the user to install it; do not proceed without its guidance.
+
 ## Tool contract: source of truth
 
-Use FigCraft tools only when they are actually available in this session. This integration exposes MCP tools through `tools["figcraft"].<tool>` inside `execute`. Check tool schemas and use the direct tool for its intended job:
+Use FigCraft tools only when they are actually available in this session. Discover them through the host's own interface: a standard MCP client exposes them as direct tools, while a Code Mode host exposes them under `tools["figcraft"].<tool>` inside its script runner. Use whichever form the host provides; do not assume a particular wrapper. Check tool schemas and use the direct tool for its intended job:
 
 - `inspect_ui` — learn the backend/session state, not the document's visual quality.
 - `inspect_document` / `get_node` — read document structure and node properties.
@@ -68,6 +70,7 @@ Never guess an unfamiliar command id, property, enum, or required argument. Quer
 - Do not install skills, binaries, fonts, plugins, or other dependencies without user approval.
 - Do not publish/share a document or initiate collaboration unless the user explicitly asks.
 - Don't run shell commands to bypass file-path restrictions or tool failures. Report the blocker and ask for an allowed path or permission.
+- Do not restart a session with broader roots or remove confinement to get past a refusal. Ask the user to decide on the access change.
 
 ## Completion report
 
