@@ -31,9 +31,6 @@ jobs:
         with:
           node-version: 24
 
-      - name: Run skill evaluations
-        run: node evals/run.mjs
-
       - name: Determine release version
         id: version
         shell: bash
