@@ -15,6 +15,7 @@ This skill set targets FigCraft's native document model and MCP interface. It is
 - Critique, quality gate, accessibility or interaction audit: `figcraft-review`.
 - Icons, SVG, images, or type: `figcraft-assets`.
 - Import, native save, or export: `figcraft-import-export`.
+- Share, collaborate, or publish: `figcraft-collaboration`.
 - Breakpoints, resizing, overflow: `figcraft-responsive`.
 - User asks to implement the design in a codebase: `figcraft-design-to-code`.
 

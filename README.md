@@ -17,6 +17,7 @@ These skills were authored from scratch after comparing publicly available FigCr
 | [`figcraft-review`](skills/figcraft-review/SKILL.md) | Structural and visual review, accessibility, and prototype audit |
 | [`figcraft-assets`](skills/figcraft-assets/SKILL.md) | SVG, icons, imagery, and typography decisions |
 | [`figcraft-import-export`](skills/figcraft-import-export/SKILL.md) | Import, save, export, and file-format handoff |
+| [`figcraft-collaboration`](skills/figcraft-collaboration/SKILL.md) | Share, collaborate, publish, and manage team libraries |
 | [`figcraft-responsive`](skills/figcraft-responsive/SKILL.md) | Responsive layout planning and size-specific verification |
 | [`figcraft-design-to-code`](skills/figcraft-design-to-code/SKILL.md) | Translate inspected FigCraft designs into implementation code |
 
